@@ -1,0 +1,18 @@
+{
+  "name": "codex-img",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/server.js",
+    "start": "node scripts/server.js",
+    "db:init": "node scripts/init-db.js",
+    "job:add": "node scripts/enqueue-job.js",
+    "worker": "node scripts/worker.js",
+    "worker:once": "node scripts/worker.js --once",
+    "worker:dry-run": "node scripts/worker.js --once --dry-run"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
