@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Image Studio</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">IS</div>
+          <div>
+            <h1>Image Studio</h1>
+            <p>Prompt queue and image results</p>
+          </div>
+        </div>
+        <div class="status-strip">
+          <span class="pulse"></span>
+          <span id="queueSummary">Syncing</span>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <form class="composer" id="promptForm">
+          <div class="composer-head">
+            <span class="eyebrow">Prompt</span>
+            <span class="counter" id="charCount">0</span>
+          </div>
+          <textarea id="promptInput" name="prompt" maxlength="4000" placeholder="A cinematic product photo of a transparent speaker on a brushed steel desk, cool studio lighting, sharp reflections"></textarea>
+          <div class="reference-panel">
+            <div class="reference-head">
+              <span class="eyebrow">References</span>
+              <label class="upload-button">
+                <input id="referenceInput" type="file" accept="image/png,image/jpeg,image/webp" multiple>
+                Add images
+              </label>
+            </div>
+            <div class="reference-list" id="referenceList">
+              <p class="reference-empty">Upload reference images, name them, then mention them in the prompt with @name.</p>
+            </div>
+          </div>
+          <div class="composer-actions">
+            <button class="primary" type="submit" data-testid="generate-button">
+              <span class="button-icon">+</span>
+              Generate
+            </button>
+            <button class="secondary" type="button" id="refreshButton">Refresh</button>
+          </div>
+          <p class="form-message" id="formMessage"></p>
+        </form>
+
+        <aside class="preview-panel">
+          <div class="preview-frame">
+            <img id="heroPreview" src="/generated/job-3/image.png" alt="Generated image preview">
+          </div>
+          <div class="preview-meta">
+            <span>Latest output</span>
+            <strong id="latestTitle">Waiting for images</strong>
+          </div>
+        </aside>
+      </section>
+
+      <section class="queue-section">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Queue</span>
+            <h2>Generations</h2>
+          </div>
+          <div class="legend">
+            <span><i class="dot queued"></i>Queued</span>
+            <span><i class="dot processing"></i>Processing</span>
+            <span><i class="dot done"></i>Done</span>
+          </div>
+        </div>
+        <div class="job-grid" id="jobGrid"></div>
+      </section>
+    </main>
+
+    <template id="jobTemplate">
+      <article class="job-card">
+        <a class="thumb" target="_blank" rel="noreferrer">
+          <img alt="">
+          <div class="thumb-empty">Pending</div>
+        </a>
+        <div class="job-body">
+          <div class="job-line">
+            <span class="status-pill"></span>
+            <span class="job-id"></span>
+          </div>
+          <p class="job-prompt"></p>
+          <div class="job-references"></div>
+          <p class="job-error"></p>
+          <div class="job-footer">
+            <time class="job-time"></time>
+            <button class="delete-job" type="button" data-testid="delete-job">Delete</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
